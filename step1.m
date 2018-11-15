@@ -1,6 +1,6 @@
 % excute the job in dqshtc
 
-DIR= '/scratch/tli3/PSC_biobank/';
+DIR= './temp';
 %datadir=fullfile(DIR,'data');
 datadir=fullfile(DIR,'data1');
 %datadir=fullfile(DIR,'data2');
