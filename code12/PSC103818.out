@@ -1,0 +1,55 @@
+
+The following have been reloaded with a version change:
+  1) GCC/4.8.3 => GCC/6.4.0
+
+/var/spool/slurm/job6256635/slurm_script: line 11: setenv: command not found
+/var/spool/slurm/job6256635/slurm_script: line 12: setenv: command not found
+/var/spool/slurm/job6256635/slurm_script: line 13: setenv: command not found
+/var/spool/slurm/job6256635/slurm_script: line 14: cd: ../data/103818: No such file or directory
+mv: cannot stat ‘dwi.nii.gz’: No such file or directory
+mv: cannot stat ‘nodif.nii.gz’: No such file or directory
+mv: cannot stat ‘bvecs0’: No such file or directory
+mv: cannot stat ‘bvals0’: No such file or directory
+mv: cannot stat ‘AP.bval’: No such file or directory
+mv: cannot stat ‘AP.bvec’: No such file or directory
+mrconvert: [00;31m[WARNING] existing output files will be overwritten[0m
+mrconvert: [ERROR] cannot access file "data.nii.gz": No such file or directory
+mrconvert: [ERROR] error opening image "data.nii.gz"
+/home/yl148/PSC/Scilpy/PSC_Pipeline/UK_Biobank//PREPROCESS_Step1_Registration.sh: line 39: scil_convert_gradient_fsl_to_mrtrix.py: command not found
+/home/yl148/PSC/Scilpy/PSC_Pipeline/UK_Biobank//PREPROCESS_Step1_Registration.sh: line 40: scil_flip_grad.py: command not found
+/home/yl148/PSC/Scilpy/PSC_Pipeline/UK_Biobank//PREPROCESS_Step1_Registration.sh: line 41: scil_convert_gradient_mrtrix_to_fsl.py: command not found
+mv: cannot stat ‘T1.nii.gz’: No such file or directory
+/home/yl148/PSC/Scilpy/PSC_Pipeline/UK_Biobank//PREPROCESS_Step1_Registration.sh: line 47: scil_run_nlmeans.py: command not found
+/home/yl148/PSC/Scilpy/PSC_Pipeline/UK_Biobank//PREPROCESS_Step1_Registration.sh: line 50: scil_resample_volume.py: command not found
+ERROR:: Environment variable FSLOUTPUTTYPE is not set!
+Please make sure that the appropriate configuration file is sourced by your shell (e.g. by putting it in .profile).
+e.g. bash or sh users add the line ". ${FSLDIR}/etc/fslconf/fsl.sh"
+e.g. tcsh or csh users add the line "source ${FSLDIR}/etc/fslconf/fsl.csh"
+
+Error: input image diffusion/data_1x1x1 not valid
+
+mv: cannot stat ‘mask.nii.gz’: No such file or directory
+ERROR:: Environment variable FSLOUTPUTTYPE is not set!
+Please make sure that the appropriate configuration file is sourced by your shell (e.g. by putting it in .profile).
+e.g. bash or sh users add the line ". ${FSLDIR}/etc/fslconf/fsl.sh"
+e.g. tcsh or csh users add the line "source ${FSLDIR}/etc/fslconf/fsl.csh"
+/home/yl148/PSC/Scilpy/PSC_Pipeline/UK_Biobank//PREPROCESS_Step1_Registration.sh: line 70: scil_compute_dti_metrics.py: command not found
+All_Command_lines_OK
+Using double precision for computations.
+  number of levels = 4
+  fixed image: b0_brain.nii.gz
+  moving image: registration/mask_dt1_t1.nii.gz
+ file b0_brain.nii.gz does not exist . 
+ file registration/mask_dt1_t1.nii.gz does not exist . 
+/home/yl148/PSC/Scilpy/PSC_Pipeline/UK_Biobank//PREPROCESS_Step1_Registration.sh: line 79: 27888 Segmentation fault      antsRegistration -d 3 -m MI[b0_brain.nii.gz,registration/mask_dt1_t1.nii.gz,1,32,Regular,0.25] -m MI[diffusion/fa.nii.gz,registration/mask_dt1_t1.nii.gz,1,4] -c [1000x500x250x0,1e-7,5] -t affine[0.1] -f 8x4x2x1 -s 4x2x1x0 -u 1 -o Antsaffine
+Using double precision for computations.
+Input scalar image: registration/T1_dti_1.nii.gz
+ file registration/T1_dti_1.nii.gz does not exist . 
+Reference image: b0_brain.nii.gz
+ file b0_brain.nii.gz does not exist . 
+Transform file does not exist: Antsaffine0GenericAffine.mat
+Can't read initial transform Antsaffine0GenericAffine.mat
+
+Error: input image T1_dti_final not valid
+
+mv: cannot stat ‘t1_brain_mask.nii.gz’: No such file or directory

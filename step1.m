@@ -1,8 +1,8 @@
 % excute the job in dqshtc
 
-DIR= './temp';
-%datadir=fullfile(DIR,'data');
-datadir=fullfile(DIR,'data1');
+DIR= '/home/yl148/PSC';
+%datadir=fullfile(DIR,'data')
+datadir=fullfile('../','data');
 %datadir=fullfile(DIR,'data2');
 subID=dir(datadir);
 subID={subID.name};
@@ -56,19 +56,30 @@ for i=1:L
 	
     fid = fopen(sprintf('%s/jobsubmission_stg1_%s.pbs',codedir,subID{i}),'w');
     %fprintf(fid,'#PBS -l nodes=1:rhel7:ppn=1 -l walltime=23:59:59,mem=8gb\n');
-    fprintf(fid,'#PBS -l nodes=1:rhel7:ppn=1 -l walltime=23:59:59,mem=16gb\n');
-    fprintf(fid,'#PBS -N Zhengwu_%s\n',subID{i});
-    fprintf(fid,'#PBS -o Zhengwu_%s.out\n',subID{i});
-    fprintf(fid,'#PBS -j oe\n');
-	fprintf(fid, '# sub job for subject %s \n', sub_id);
-    fprintf(fid,'module load gsl/1.16\n');
-    fprintf(fid,'module load mrtrix\n');
-    fprintf(fid,'module load FSL\n');
-    fprintf(fid,'module load ANTs/2.1.0\n');
+    %%fprintf(fid,'#PBS -l nodes=1:rhel7:ppn=1 -l walltime=23:59:59,mem=16gb\n');
+    fprintf(fid, '#!/bin/bash\n');
+    fprintf(fid, '#SBATCH --ntasks=1\n');
+    fprintf(fid, '#SBATCH --mem-per-cpu=16000m\n');
+    fprintf(fid, '#SBATCH --time=10:00:00\n');
+    fprintf(fid, '#SBATCH --mail-type=ALL\n');
+
+    %%fprintf(fid,'#PBS -N Zhengwu_%s\n',subID{i});
+    fprintf(fid,'#SBATCH --job-name=PSC%s\n',subID{i});
+    %%fprintf(fid,'#PBS -o Zhengwu_%s.out\n',subID{i});
+    fprintf(fid,'#SBATCH -o PSC%s.out\n',subID{i});
+
+    %%fprintf(fid,'#PBS -j oe\n');
+    fprintf(fid, '# sub job for subject %s \n', sub_id);
+    fprintf(fid,'module load GCC/6.4.0  OpenMPI/2.1.3 MRtrix/0.3.15 GSL/2.4  ANTs/2.1.0 FreeSurfer/6.0.0 FSL\n');
+    fprintf(fid,'module load Anaconda2/5.0.0\n');
+
+    %%fprintf(fid,'module load mrtrix\n');
+    %%fprintf(fid,'module load FSL\n');
+    %%fprintf(fid,'module load ANTs/2.1.0\n');
     fprintf(fid,'setenv PATH /workspace/tli3/software/Anaconda2_for_scilpy2017/Anaconda2/bin:$PATH \n');
-	fprintf(fid,'setenv PATH %s/scripts/:${PATH} \n',scriptdir);
+    fprintf(fid,'setenv PATH %s/scripts/:${PATH} \n',scriptdir);
     fprintf(fid,'setenv PYTHONPATH %s/ \n',scriptdir);
-	fprintf(fid,'cd %s/%s \n',datadir,sub_id);
+    fprintf(fid,'cd %s/%s \n',datadir,sub_id);
     %remove output1 and prepare for re-write
     fprintf(fid,'chmod 775 %s/PREPROCESS_Step1_Registration.sh \n',scriptdir1);
 	
@@ -82,7 +93,7 @@ for i=1:L
     fprintf(fid, '# sub job for subject %s is done \n', sub_id);
     fprintf(fid, '# -------------------------   #');
     fclose(fid);	
-	fprintf(fid0,'qsub jobsubmission_stg1_%s.pbs\n',subID{i});
+	fprintf(fid0,'sbatch jobsubmission_stg1_%s.pbs\n',subID{i});
 end
 
 fclose(fid0);
