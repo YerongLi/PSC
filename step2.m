@@ -5,7 +5,7 @@
 % Jan    8, 2015 @ by CH
 % May   17, 2016 @ by TFL
 
-FSDir = '/rsrch2/biostatistics/tli3/PNC_Zhengwu_freesurfer';                % directory containing the data folder and other files.  you need to change the directory accordingly
+FSDir = '/home/yl148/PSC';                % directory containing the data folder and other files.  you need to change the directory accordingly
 datadir=fullfile(FSDir,'data');
 codedir=fullfile(FSDir,'code');
 mkdir(codedir);
@@ -36,20 +36,30 @@ for ii=1:nn
 	% end
     batNames = sprintf('%s/FS_bat%i.pbs',codedir,ii);
     fid = fopen(batNames,'w'); 
-	fprintf(fid,'#PBS -N freesurfer\n');
-    fprintf(fid,'#PBS -l nodes=1:ppn=8,walltime=23:59:59,mem=40gb\n');
-    fprintf(fid,'#PBS -o %s\n',codedir);
-    fprintf(fid,'#PBS -e %s\n',codedir);
-    fprintf(fid,'#PBS -d %s\n',codedir);
-    fprintf(fid,'#PBS -V\n');
-    fprintf(fid,'#PBS -m e\n');
-    fprintf(fid,'#PBS -M YourEmailAddressHerer@server\n');
+    
+    % fprintf(fid,'#PBS -N freesurfer\n');
+    fprintf(fid, '#!/bin/bash\n');
+    
+    fprintf(fid,'#SBATCH --job-name=freesurfer\n');
+    fprintf(fid,'#SBATCH --account=commons\n');
+    fprintf(fid,'#SBATCH --partition=commons\n');
+    % fprintf(fid,'#PBS -l nodes=1:ppn=8,walltime=23:59:59,mem=40gb\n');
+    fprintf(fid, '#SBATCH -N 1 -c 8 --mem=40g\n');
+    fprintf(fid, '#SBATCH --time=10:00:00\n');
+    fprintf(fid, '#SBATCH --mail-type=ALL\n');
+    
+    fprintf(fid,'#SBATCH -o surfreer.out\n');
+    %fprintf(fid,'#PBS -e %s\n',codedir);
+    %fprintf(fid,'#PBS -d %s\n',codedir);
+    %fprintf(fid,'#PBS -V\n');
+    %fprintf(fid,'#PBS -m e\n');
+    %fprintf(fid,'#PBS -M YourEmailAddressHerer@server\n');
     fprintf(fid,'#This line is required.\n');
     fprintf(fid,'#export MCR_CACHE_ROOT=$TMPDIR\n');
     fprintf(fid,'\n');
-    fprintf(fid,'module load freesurfer \n');
+    fprintf(fid,'module load FreeSurfer/6.0.0\n');
     fprintf(fid,'#!/bin/bash\n');
-    fprintf(fid,'export FREESURFER_HOME=/risapps/rhel6/freesurfer/5.3.0/freesurfer\n');
+    fprintf(fid,'export FREESURFER_HOME=/opt/apps/software/Core/FreeSurfer/6.0.0/\n');
     fprintf(fid,'source $FREESURFER_HOME/SetUpFreeSurfer.sh\n');
     fprintf(fid,'export SUBJECTS_DIR=%s/%s\n', datadir,subNames{ii}); 
 	fprintf(fid,'cd %s/%s \n',datadir,subNames{ii});

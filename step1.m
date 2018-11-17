@@ -68,8 +68,8 @@ for i=1:L
     %%fprintf(fid,'#PBS -N Zhengwu_%s\n',subID{i});
     fprintf(fid,'#SBATCH --job-name=%s\n',subID{i});
     %%fprintf(fid,'#PBS -o Zhengwu_%s.out\n',subID{i});
-    fprintf(fid,'#SBATCH -o PSC%s.out\n',subID{i});
-    fprintf(fid,'#SBATCH -e err%s\n',subID{i});
+    fprintf(fid,'#SBATCH -o %s.out\n',subID{i});
+    %%fprintf(fid,'#SBATCH -e err%s\n',subID{i});
     %%fprintf(fid,'#PBS -j oe\n');
     fprintf(fid, '# sub job for subject %s \n', sub_id);
     fprintf(fid,'module load GCC/6.4.0  OpenMPI/2.1.3 MRtrix/0.3.15 GSL/2.4  ANTs/2.1.0 FreeSurfer/6.0.0 FSL\n');
@@ -91,7 +91,7 @@ for i=1:L
 	fprintf(fid,'mv bvals0 bvals \n');
 	
 	
-    fprintf(fid,'sh %s/PREPROCESS_Step1_Registration.sh \n',scriptdir1);
+    fprintf(fid,'sh %s/PREPROCESS_Step1_Registration.sh | tee %s \n',scriptdir1, sub_id);
     fprintf(fid, '# sub job for subject %s is done \n', sub_id);
     fprintf(fid, '# -------------------------   #');
     fclose(fid);	
