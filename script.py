@@ -17,7 +17,7 @@ from dipy.tracking.streamline import Streamlines
 
 
 id = 103818
-folder = pjoin('/projects','ml75','data',str(id))
+folder = pjoin('data',str(id))
 img, gtab = read_data(folder)
 #print(img)
 
