@@ -1,6 +1,6 @@
 % excute the job in dqshtc
 
-DIR= '/scratch/tli3/PSC_biobank/';
+DIR= '/home/yl148/PSC';
 datadir=fullfile(DIR,'data');
 moveto='/BIGS2DATA/Dataset/Non_MDAdata/BioBank/Imaging/ProcessedData/PSC_Tengfei_20180419/step3/';
 subID=dir(datadir);

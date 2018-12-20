@@ -1,6 +1,6 @@
 % excute the job in dqshtc
 
-DIR= '/home/yl148/PSC/';
+DIR= '/scratch/yl148/PSC/';
 %datadir=fullfile(DIR,'data')
 datadir=fullfile(DIR,'data');
 %datadir=fullfile(DIR,'data2');
@@ -12,7 +12,7 @@ L=length(subID);
 scriptdir =fullfile(DIR,'Scilpy/');
 scriptdir1 =fullfile(scriptdir,'PSC_Pipeline/UK_Biobank/');
 
-codedir = fullfile(DIR,'code');
+codedir = fullfile(DIR,'code1');
 %codedir = fullfile(DIR,'code1');
 
 if exist(codedir)
