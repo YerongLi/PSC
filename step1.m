@@ -1,9 +1,7 @@
 % excute the job in dqshtc
 
 DIR= '/scratch/yl148/PSC/';
-%datadir=fullfile(DIR,'data')
 datadir=fullfile(DIR,'data');
-%datadir=fullfile(DIR,'data2');
 subID=dir(datadir);
 subID={subID.name};
 subID=subID(3:end);
@@ -13,7 +11,6 @@ scriptdir =fullfile(DIR,'Scilpy/');
 scriptdir1 =fullfile(scriptdir,'PSC_Pipeline/UK_Biobank/');
 
 codedir = fullfile(DIR,'code1');
-%codedir = fullfile(DIR,'code1');
 
 if exist(codedir)
    delete(fullfile(codedir,'/*'));
@@ -83,7 +80,7 @@ for i=1:L
     fprintf(fid,'export PYTHONPATH=%s \n',scriptdir);
     fprintf(fid,'cd %s/%s \n',datadir,sub_id);
     %remove output1 and prepare for re-write
-    fprintf(fid,'chmod 775 %s/PREPROCESS_Step1_Registration.sh \n',scriptdir1);
+    fprintf(fid,'chmod 775 %sPREPROCESS_Step1_Registration.sh \n',scriptdir1);
 	
 	fprintf(fid,'mv dwi.nii.gz data.nii.gz \n');
 	fprintf(fid,'mv nodif.nii.gz t1.nii.gz \n');
@@ -91,7 +88,7 @@ for i=1:L
 	fprintf(fid,'mv bvals0 bvals \n');
 	
 	
-    fprintf(fid,'sh %s/PREPROCESS_Step1_Registration.sh | tee %s \n',scriptdir1, sub_id);
+    fprintf(fid,'sh %sPREPROCESS_Step1_Registration.sh | tee %s \n',scriptdir1, sub_id);
     fprintf(fid, '# sub job for subject %s is done \n', sub_id);
     fprintf(fid, '# -------------------------   #');
     fclose(fid);	

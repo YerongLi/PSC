@@ -5,7 +5,7 @@
 % Jan    8, 2015 @ by CH
 % May   17, 2016 @ by TFL
 
-FSDir = '/home/yl148/PSC';                % directory containing the data folder and other files.  you need to change the directory accordingly
+FSDir = '/scratch/yl148/PSC';                % directory containing the data folder and other files.  you need to change the directory accordingly
 datadir=fullfile(FSDir,'data');
 codedir=fullfile(FSDir,'code');
 mkdir(codedir);

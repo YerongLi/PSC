@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --job-name=freesurfer
+#SBATCH --account=commons
+#SBATCH --partition=commons
+#SBATCH -N 1 -c 8 --mem=40g
+#SBATCH --time=10:00:00
+#SBATCH --mail-type=ALL
+#SBATCH -o surfreer.out
+#This line is required.
+#export MCR_CACHE_ROOT=$TMPDIR
+
+module load FreeSurfer/6.0.0
+#!/bin/bash
+export FREESURFER_HOME=/opt/apps/software/Core/FreeSurfer/6.0.0/
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+export SUBJECTS_DIR=/scratch/yl148/PSC/data/100206
+cd /scratch/yl148/PSC/data/100206 
+rm -r -f pnc100206 
+recon-all -openmp 8 -subjid pnc100206 -i T1_dti_final.nii.gz -all
