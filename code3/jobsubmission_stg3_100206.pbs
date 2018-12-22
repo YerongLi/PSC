@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH --job-name=3_100206
+#SBATCH --ntasks=4
+#SBATCH --mem-per-cpu=32000m
+#SBATCH --time=23:59:00
+module load GSL/2.4
+module load MRtrix/0.3.15
+module load FSL/5.0.10
+module load ANTs/2.1.0
+module load FreeSurfer/6.0.0
+export PATH=/workspace/tli3/software/Anaconda2_for_scilpy2017/Anaconda2/bin:$PATH 
+export PATH=/scratch/yl148/PSC/Scilpy//scripts/:${PATH} 
+export PYTHONPATH=/scratch/yl148/PSC/Scilpy/ 
+cd /scratch/yl148/PSC/data/100206 
+cp pnc100206/mri/aparc.a2009s+aseg.mgz ./ 
+cp pnc100206/mri/wmparc.mgz ./ 
+cp pnc100206/mri/rawavg.mgz ./ 
+cp pnc100206/mri/brainmask.mgz ./ 
+chmod 775 /scratch/yl148/PSC/Scilpy/PSC_Pipeline/UK_Biobank//TRACTOGRAPHY_Step1.sh 
+sh /scratch/yl148/PSC/Scilpy/PSC_Pipeline/UK_Biobank//TRACTOGRAPHY_Step1.sh 
+# sub job for subject 100206 is done 
+# -------------------------   #
