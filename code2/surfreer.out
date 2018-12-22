@@ -1,8 +1,0 @@
-ERROR: cannot find T1_dti_final.nii.gz
-Linux bc8u7n5.nots.rice.edu 3.10.0-862.el7.x86_64 #1 SMP Wed Mar 21 18:14:51 EDT 2018 x86_64 x86_64 x86_64 GNU/Linux
-
-recon-all -s pnc100206 exited with ERRORS at Thu Dec 20 10:01:16 CST 2018
-
-For more details, see the log file 
-To report a problem, see http://surfer.nmr.mgh.harvard.edu/fswiki/BugReporting
-
