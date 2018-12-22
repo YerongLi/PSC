@@ -57,17 +57,14 @@ for i=1:L
     %fprintf(fid,'#PBS -l nodes=1:rhel7:ppn=1 -l walltime=23:59:59,mem=8gb\n');
     %%fprintf(fid,'#PBS -l nodes=1:rhel7:ppn=1 -l walltime=23:59:59,mem=16gb\n');
     fprintf(fid, '#!/bin/bash\n');
+    fprintf(fid,'#SBATCH --job-name=%s\n',subID{i});
     fprintf(fid, '#SBATCH --ntasks=1\n');
     fprintf(fid, '#SBATCH --mem-per-cpu=16000m\n');
     fprintf(fid, '#SBATCH --time=10:00:00\n');
     fprintf(fid, '#SBATCH --mail-type=ALL\n');
 
     %%fprintf(fid,'#PBS -N Zhengwu_%s\n',subID{i});
-    fprintf(fid,'#SBATCH --job-name=%s\n',subID{i});
-    %%fprintf(fid,'#PBS -o Zhengwu_%s.out\n',subID{i});
     fprintf(fid,'#SBATCH -o %s.out\n',subID{i});
-    %%fprintf(fid,'#SBATCH -e err%s\n',subID{i});
-    %%fprintf(fid,'#PBS -j oe\n');
     fprintf(fid, '# sub job for subject %s \n', sub_id);
     fprintf(fid,'module load GCC/6.4.0  OpenMPI/2.1.3 MRtrix/0.3.15 GSL/2.4  ANTs/2.1.0 FreeSurfer/6.0.0 FSL\n');
     fprintf(fid,'module load Anaconda2/5.0.0\n');
